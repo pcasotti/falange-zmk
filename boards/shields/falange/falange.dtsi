@@ -67,6 +67,7 @@ RC(0,10) RC(0,11) RC(0,12) RC(0,13) RC(0,14)                   RC(1,10) RC(1,11)
         segment-remap;
         com-invdir;
         com-sequential;
+        inversion-on;
         prechargep = <0x22>;
     };
 };
