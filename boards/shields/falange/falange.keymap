@@ -9,6 +9,14 @@
 #define GAME1 5
 
 / {
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <MOD NAV>;
+            then-layer = <NUM>;
+        };
+    };
+
     behaviors {
         td0: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
@@ -35,7 +43,7 @@
     &kp AT    &kp LBKT  &kp LBRC  &kp LPAR  &kp DLLR                      &kp LT    &kp RPAR  &kp RBRC  &kp RBKT  &kp GT
     &kp ESC   &kp STAR  &kp MINUS &kp EQUAL &kp PLUS                      &kp AMPS  &kp RGUI  &kp LALT  &kp RCTRL &kp RSHFT
     &kp PIPE  &kp HASH  &kp UNDER &kp EXCL  &kp PRCNT                     &kp BSLH  &kp SLASH &kp TILDE &kp QMARK &kp CARET
-                                            &trans    &mo NUM   &trans    &trans
+                                            &trans    &trans    &trans    &trans
             >;
         };
 
@@ -44,7 +52,7 @@
     &kp C_BRI_DN &kp C_BRI_UP &kp TAB &kp C_VOL_DN &kp C_VOL_UP           &trans    &trans    &kp UP    &kp RET   &kp DEL
     &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &kp C_MUTE                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT &kp BSPC
     &trans    &trans    &trans    &trans    &trans                        &td0      &trans    &trans    &trans    &trans
-                                            &trans    &trans    &mo NUM   &trans
+                                            &tog GAME0 &trans   &trans    &trans
             >;
         };
 
