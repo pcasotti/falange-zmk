@@ -2,7 +2,7 @@
 #include <dt-bindings/zmk/keys.h>
 
 #define DEFAULT 0
-#define MOD 1
+#define SYM 1
 #define NAV 2
 #define NUM 3
 #define GAME0 4
@@ -12,7 +12,7 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <MOD NAV>;
+            if-layers = <SYM NAV>;
             then-layer = <NUM>;
         };
     };
@@ -30,15 +30,17 @@
         compatible = "zmk,keymap";
 
         default_layer {
+            display-name = "DVORAK";
             bindings = <
     &kp SQT   &kp COMMA &kp DOT   &kp P     &kp Y                         &kp F     &kp G     &kp C     &kp R     &kp L
     &kp A     &kp O     &kp E     &kp U     &kp I                         &kp D     &kp H     &kp T     &kp N     &kp S
     &kp SEMI  &kp Q     &kp J     &kp K     &kp X                         &kp B     &kp M     &kp W     &kp V     &kp Z
-                                            &kp LSHFT &mo NAV   &mo MOD   &kp SPACE
+                                            &kp LSHFT &mo NAV   &mo SYM   &kp SPACE
             >;
         };
 
-        mod_layer {
+        sym_layer {
+            display-name = "SYM";
             bindings = <
     &kp AT    &kp LBKT  &kp LBRC  &kp LPAR  &kp DLLR                      &kp LT    &kp RPAR  &kp RBRC  &kp RBKT  &kp GT
     &kp ESC   &kp STAR  &kp MINUS &kp EQUAL &kp PLUS                      &kp AMPS  &kp RGUI  &kp LALT  &kp RCTRL &kp RSHFT
@@ -48,6 +50,7 @@
         };
 
         nav_layer {
+            display-name = "NAV";
             bindings = <
     &kp C_BRI_DN &kp C_BRI_UP &kp TAB &kp C_VOL_DN &kp C_VOL_UP           &trans    &trans    &kp UP    &kp RET   &kp DEL
     &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &kp C_MUTE                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT &kp BSPC
@@ -57,6 +60,7 @@
         };
 
         num_layer {
+            display-name = "NUM";
             bindings = <
     &kp N1    &kp N2    &kp N3    &kp N4    &kp N5                        &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
     &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &kp F11                       &kp F12   &kp RGUI  &kp LALT  &kp RCTRL &kp RSHFT
@@ -66,6 +70,7 @@
         };
 
         game0_layer {
+            display-name = "GAME";
             bindings = <
     &kp TAB   &kp Q     &kp W     &kp E     &kp R                         &none     &none     &none     &none     &none
     &kp LSHFT &kp A     &kp S     &kp D     &kp F                         &none     &none     &none     &none     &none
@@ -75,6 +80,7 @@
         };
 
         game1_layer {
+            display-name = "GAMEA";
             bindings = <
     &kp N5    &kp N4    &trans    &kp N1    &kp N2                        &none     &none     &none     &none     &none
     &kp ESC   &trans    &trans    &trans    &kp N3                        &none     &none     &none     &none     &none
