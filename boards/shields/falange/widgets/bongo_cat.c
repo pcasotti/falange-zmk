@@ -115,6 +115,9 @@ static void set_animation(lv_obj_t *animing, struct bongo_cat_wpm_status_state s
             current_anim_state = anim_state_fast;
         }
     }
+
+    lv_obj_t *label = lv_label_create(animing);
+    lv_label_set_text_fmt(label, "%3u%%", state.wpm);
 }
 
 struct bongo_cat_wpm_status_state bongo_cat_wpm_status_get_state(const zmk_event_t *eh) {
