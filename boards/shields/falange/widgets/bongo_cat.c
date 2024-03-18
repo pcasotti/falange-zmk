@@ -81,6 +81,8 @@ enum anim_state {
     anim_state_fast
 } current_anim_state;
 
+lv_obj_t *label;
+
 static void set_animation(lv_obj_t *animing, struct bongo_cat_wpm_status_state state) {
     if (state.wpm < 5) {
         if (current_anim_state != anim_state_idle) {
@@ -116,7 +118,6 @@ static void set_animation(lv_obj_t *animing, struct bongo_cat_wpm_status_state s
         }
     }
 
-    lv_obj_t *label = lv_label_create(animing);
     lv_label_set_text_fmt(label, "%3u%%", state.wpm);
 }
 
@@ -138,6 +139,9 @@ ZMK_SUBSCRIPTION(widget_bongo_cat, zmk_wpm_state_changed);
 int zmk_widget_bongo_cat_init(struct zmk_widget_bongo_cat *widget, lv_obj_t *parent) {
     widget->obj = lv_animimg_create(parent);
     lv_obj_center(widget->obj);
+
+    label = lv_label_create(widget->obj);
+    lv_obj_align(label, LV_ALIGN_TOP_LEFT, 0, 0);
 
     sys_slist_append(&widgets, &widget->node);
 
