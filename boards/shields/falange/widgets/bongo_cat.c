@@ -139,9 +139,10 @@ ZMK_SUBSCRIPTION(widget_bongo_cat, zmk_wpm_state_changed);
 int zmk_widget_bongo_cat_init(struct zmk_widget_bongo_cat *widget, lv_obj_t *parent) {
     widget->obj = lv_animimg_create(parent);
     lv_obj_center(widget->obj);
+    lv_obj_set_height(widget->obj, 31);
 
     label = lv_label_create(widget->obj);
-    lv_obj_align(label, LV_ALIGN_BOTTOM_LEFT, 0, 5);
+    lv_obj_align(label, LV_ALIGN_BOTTOM_LEFT, 0, 0);
 
     sys_slist_append(&widgets, &widget->node);
 
