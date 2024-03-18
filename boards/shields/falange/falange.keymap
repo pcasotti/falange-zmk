@@ -5,8 +5,18 @@
 #define MOD 1
 #define NAV 2
 #define NUM 3
+#define GAME0 4
+#define GAME1 5
 
 / {
+    behaviors {
+        td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&tog GAME0>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -32,7 +42,7 @@
             bindings = <
     &kp C_BRI_DN &kp C_BRI_UP &kp TAB &kp C_VOL_DN &kp C_VOL_UP           &trans    &trans    &kp UP    &kp RET   &kp DEL
     &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &kp C_MUTE                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT &kp BSPC
-    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &td0      &trans    &trans    &trans    &trans
                                             &trans    &trans    &mo NUM   &trans
             >;
         };
@@ -42,7 +52,25 @@
     &kp N1    &kp N2    &kp N3    &kp N4    &kp N5                        &kp N6    &kp N7    &kp N8    &kp N9    &kp N0
     &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &kp F11                       &kp F12   &kp RGUI  &kp LALT  &kp RCTRL &kp RSHFT
     &kp F1    &kp F2    &kp F3    &kp F4    &kp F5                        &kp F6    &kp F7    &kp F8    &kp F9    &kp F10
-                                            &trans    &trans    &trans    &trans
+                                            &trans    &mo NUM   &mo NUM   &trans
+            >;
+        };
+
+        game0_layer {
+            bindings = <
+    &kp TAB   &kp Q     &kp W     &kp E     &kp R                         &none     &none     &none     &none     &none
+    &kp LSHFT &kp A     &kp S     &kp D     &kp F                         &none     &none     &none     &none     &none
+    &kp LCTRL &kp X     &kp C     &kp V     &kp G                         &none     &none     &none     &none     &none
+                                            &kp SPACE &mo GAME1 &none     &none
+            >;
+        };
+
+        game1_layer {
+            bindings = <
+    &kp N5    &kp N4    &trans    &kp N1    &kp N2                        &none     &none     &none     &none     &none
+    &kp ESC   &trans    &trans    &trans    &kp N3                        &none     &none     &none     &none     &none
+    &kp SQT   &trans    &kp T     &kp P     &trans                        &none     &none     &none     &none     &none
+                                            &trans    &trans    &none     &none
             >;
         };
     };
