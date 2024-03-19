@@ -32,7 +32,8 @@ static void set_layer_symbol(lv_obj_t *label, struct layer_status_state state) {
     } else {
         char text[13] = {};
 
-        snprintf(text, sizeof(text), "%s", state.label);
+        int padlen = (6 - strlen(state.label)) / 2;
+        snprintf(text, sizeof(text), "%*s%s%*s\n", padlen, "", state.label, padlen, "");
 
         lv_label_set_text(label, text);
     }
