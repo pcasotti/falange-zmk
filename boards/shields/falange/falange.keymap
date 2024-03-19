@@ -1,6 +1,8 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+#include "helper.h"
+
 #define DEFAULT 0
 #define SYM 1
 #define NAV 2
@@ -8,6 +10,8 @@
 #define ACC 4
 #define GAME0 5
 #define GAME1 6
+
+ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)
 
 / {
     conditional_layers {
@@ -46,7 +50,7 @@
     &kp AT    &kp LBKT  &kp LBRC  &kp LPAR  &kp DLLR                      &kp LT    &kp RPAR  &kp RBRC  &kp RBKT  &kp GT
     &kp ESC   &kp STAR  &kp MINUS &kp EQUAL &kp PLUS                      &kp AMPS  &kp RGUI  &kp LALT  &kp RCTRL &kp RSHFT
     &kp PIPE  &kp HASH  &kp UNDER &kp EXCL  &kp PRCNT                     &kp BSLH  &kp SLASH &kp TILDE &kp QMARK &kp CARET
-                                            &trans    &trans    &trans    &trans
+                                            &mo ACC   &trans    &trans    &trans
             >;
         };
 
@@ -73,7 +77,7 @@
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &euro_sign &trans    &trans
     &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
     &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
                                             &trans    &trans    &trans    &trans
