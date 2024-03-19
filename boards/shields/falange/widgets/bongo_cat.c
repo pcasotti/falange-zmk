@@ -119,7 +119,7 @@ static void set_animation(lv_obj_t *widget, struct bongo_cat_wpm_status_state st
         }
     }
 
-    lv_label_set_text_fmt(label, "%3i", state.wpm);
+    lv_label_set_text_fmt(label, "%i", state.wpm);
 }
 
 struct bongo_cat_wpm_status_state bongo_cat_wpm_status_get_state(const zmk_event_t *eh) {
