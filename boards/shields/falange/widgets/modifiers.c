@@ -70,31 +70,14 @@ static void anim_y_cb(void *var, int32_t v) {
     lv_obj_set_y(var, v);
 }
 
-static void anim_s_cb(void *var, int32_t v) {
-    lv_img_set_angle(var, v);
-}
-
 static void move_object_y(void *obj, int32_t from, int32_t to) {
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, obj);
     lv_anim_set_time(&a, 200); // will be replaced with lv_anim_set_duration
     lv_anim_set_exec_cb(&a, anim_y_cb);
-    lv_anim_set_path_cb(&a, lv_anim_path_overshoot);
-    lv_anim_set_values(&a, from, to);
-    lv_anim_start(&a);
-}
-
-static void shake(void *obj, int32_t from, int32_t to) {
-    lv_img_set_pivot(obj, 14, 14);
-    lv_anim_t a;
-    lv_anim_init(&a);
-    lv_anim_set_var(&a, obj);
-    lv_anim_set_time(&a, 5000);
-    lv_anim_set_exec_cb(&a, anim_s_cb);
     lv_anim_set_path_cb(&a, lv_anim_path_bounce);
     lv_anim_set_values(&a, from, to);
-    lv_anim_set_playback_time(&a, 5000);
     lv_anim_start(&a);
 }
 
@@ -103,7 +86,6 @@ static void set_modifiers(lv_obj_t *widget, struct modifiers_state state) {
         bool mod_is_active = state.modifiers & modifier_symbols[i]->modifier;
 
         if (mod_is_active && !modifier_symbols[i]->is_active) {
-            shake(modifier_symbols[i]->symbol, 0, 3600);
             move_object_y(modifier_symbols[i]->symbol, 1, 0);
             move_object_y(modifier_symbols[i]->selection_line, SIZE_SYMBOLS + 4, SIZE_SYMBOLS + 2);
             modifier_symbols[i]->is_active = true;
