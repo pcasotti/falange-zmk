@@ -89,10 +89,11 @@ static void shake(void *obj, int32_t from, int32_t to) {
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, obj);
-    lv_anim_set_time(&a, 200); // will be replaced with lv_anim_set_duration
+    lv_anim_set_time(&a, 2000);
     lv_anim_set_exec_cb(&a, anim_s_cb);
     lv_anim_set_path_cb(&a, lv_anim_path_bounce);
     lv_anim_set_values(&a, from, to);
+    lv_anim_set_playback_time(&a, 2000);
     lv_anim_start(&a);
 }
 
@@ -106,7 +107,6 @@ static void set_modifiers(lv_obj_t *widget, struct modifiers_state state) {
             move_object_y(modifier_symbols[i]->selection_line, SIZE_SYMBOLS + 4, SIZE_SYMBOLS + 2);
             modifier_symbols[i]->is_active = true;
         } else if (!mod_is_active && modifier_symbols[i]->is_active) {
-            shake(modifier_symbols[i]->symbol, -450, 0);
             move_object_y(modifier_symbols[i]->symbol, 0, 1);
             move_object_y(modifier_symbols[i]->selection_line, SIZE_SYMBOLS + 2, SIZE_SYMBOLS + 4);
             modifier_symbols[i]->is_active = false;
