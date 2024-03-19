@@ -46,7 +46,10 @@
                 = <&macro_press   &kp LSHFT &kp LCTRL>
                 , <&macro_tap     &kp U>
                 , <&macro_release &kp LSHFT &kp LCTRL>
-                , <&macro_tap     &kp KP_N0 &kp KP_N1 &kp KP_N6 &kp KP_N3>
+                , <&macro_tap     &kp KP_N0>
+                , <&macro_tap     &kp KP_N1>
+                , <&macro_tap     &kp KP_N6>
+                , <&macro_tap     &kp KP_N3>
                 , <&macro_tap     &kp RET>
                 ;
         };
@@ -56,7 +59,7 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            display-name = "DVORAK";
+            display-name = "BASE";
             bindings = <
     &kp SQT   &kp COMMA &kp DOT   &kp P     &kp Y                         &kp F     &kp G     &kp C     &kp R     &kp L
     &kp A     &kp O     &kp E     &kp U     &kp I                         &kp D     &kp H     &kp T     &kp N     &kp S
