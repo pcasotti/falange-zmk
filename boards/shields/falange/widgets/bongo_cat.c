@@ -143,10 +143,10 @@ int zmk_widget_bongo_cat_init(struct zmk_widget_bongo_cat *widget, lv_obj_t *par
     lv_obj_set_height(widget->obj, 31);
 
     anim = lv_animimg_create(widget->obj);
-    lv_obj_align(anim, LV_ALIGN_TOP_MID, 0, 0);
+    lv_obj_set_align(anim, LV_ALIGN_TOP_MID, 0, 0);
 
     label = lv_label_create(widget->obj);
-    lv_obj_align(label, LV_ALIGN_BOTTOM_LEFT, 0, 0);
+    lv_obj_set_align(label, LV_ALIGN_BOTTOM_LEFT, 0, 0);
 
     sys_slist_append(&widgets, &widget->node);
 
