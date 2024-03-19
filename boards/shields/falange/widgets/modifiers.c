@@ -86,15 +86,15 @@ static void move_object_y(void *obj, int32_t from, int32_t to) {
 }
 
 static void shake(void *obj, int32_t from, int32_t to) {
-    lv_img_set_pivot(obj, 0, 0);
+    lv_img_set_pivot(obj, 14, 14);
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, obj);
-    lv_anim_set_time(&a, 3000);
+    lv_anim_set_time(&a, 5000);
     lv_anim_set_exec_cb(&a, anim_s_cb);
     lv_anim_set_path_cb(&a, lv_anim_path_bounce);
     lv_anim_set_values(&a, from, to);
-    lv_anim_set_playback_time(&a, 3000);
+    lv_anim_set_playback_time(&a, 5000);
     lv_anim_start(&a);
 }
 
