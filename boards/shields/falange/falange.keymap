@@ -11,6 +11,9 @@
 #define GAME0 5
 #define GAME1 6
 
+#define OS_UNICODE_LEAD &macro_tap &kp LS(LC(U))
+#define OS_UNICODE_TRAIL &macro_tap &kp SPACE
+
 ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)
 
 / {
