@@ -98,9 +98,9 @@
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &zed_em_kay &trans    &trans
-    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans
-    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &zed_em_kay &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
                                             &trans    &trans    &trans    &trans
             >;
         };
