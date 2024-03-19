@@ -86,7 +86,7 @@ static void move_object_y(void *obj, int32_t from, int32_t to) {
 }
 
 static void shake(void *obj, int32_t from, int32_t to) {
-    lv_img_set_pivot(obj, 7, 7);
+    lv_img_set_pivot(obj, 0, 0);
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, obj);
