@@ -54,7 +54,7 @@ lv_obj_t *zmk_display_status_screen() {
 
     zmk_widget_layer_status_init(&layer_status_widget, screen);
     // lv_obj_align(zmk_widget_layer_status_obj(&layer_status_widget), LV_ALIGN_BOTTOM_LEFT, 2, -18);
-    lv_obj_align(zmk_widget_layer_status_obj(&layer_status_widget), LV_ALIGN_BOTTOM_LEFT, 0, 0);
+    lv_obj_align_to(zmk_widget_layer_status_obj(&layer_status_widget), zmk_widget_modifiers_obj(&modifiers_widget), LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
 
     zmk_widget_peripheral_battery_status_init(&peripheral_battery_status_widget, screen);
     lv_obj_align(zmk_widget_peripheral_battery_status_obj(&peripheral_battery_status_widget), LV_ALIGN_BOTTOM_RIGHT, 0, 0);
