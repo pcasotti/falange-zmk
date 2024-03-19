@@ -56,10 +56,10 @@ struct modifier_symbol ms_gui = {
 
 struct modifier_symbol *modifier_symbols[] = {
     // this order determines the order of the symbols
-    &ms_gui,
-    &ms_alt,
-    &ms_control,
     &ms_shift
+    &ms_control,
+    &ms_alt,
+    &ms_gui,
 };
 
 #define NUM_SYMBOLS (sizeof(modifier_symbols) / sizeof(struct modifier_symbol *))
