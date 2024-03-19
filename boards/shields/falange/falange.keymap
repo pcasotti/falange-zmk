@@ -25,34 +25,6 @@
             tapping-term-ms = <200>;
             bindings = <&none>, <&tog GAME0>;
         };
-
-        acc: accent_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <50>;
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&mo>, <&sl>;
-        };
-    };
-
-    macros {
-        zed_em_kay: zed_em_kay {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <40>;
-            tap-ms = <40>;
-            bindings
-                = <&macro_press   &kp LSHFT &kp LCTRL>
-                , <&macro_tap     &kp U>
-                , <&macro_release &kp LSHFT &kp LCTRL>
-                , <&macro_tap     &kp KP_N0>
-                , <&macro_tap     &kp KP_N1>
-                , <&macro_tap     &kp KP_N6>
-                , <&macro_tap     &kp KP_N3>
-                , <&macro_tap     &kp RET>
-                ;
-        };
     };
 
     keymap {
@@ -64,7 +36,7 @@
     &kp SQT   &kp COMMA &kp DOT   &kp P     &kp Y                         &kp F     &kp G     &kp C     &kp R     &kp L
     &kp A     &kp O     &kp E     &kp U     &kp I                         &kp D     &kp H     &kp T     &kp N     &kp S
     &kp SEMI  &kp Q     &kp J     &kp K     &kp X                         &kp B     &kp M     &kp W     &kp V     &kp Z
-                                            &kp LSHFT &mo NAV &acc SYM ACC &kp SPACE
+                                            &kp LSHFT &mo NAV   &mo SYM   &kp SPACE
             >;
         };
 
@@ -101,7 +73,7 @@
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &zed_em_kay &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
     &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
     &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
                                             &trans    &trans    &trans    &trans
