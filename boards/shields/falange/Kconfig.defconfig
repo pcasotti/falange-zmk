@@ -29,6 +29,9 @@ endif
 
 if SHIELD_FALANGE_LEFT || SHIELD_FALANGE_RIGHT
 
+config CONFIG_ZMK_BATTERY_REPORTING
+    default y
+
 config ZMK_SPLIT
     default y
 
