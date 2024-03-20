@@ -1,5 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 
 #include "helper.h"
 
@@ -80,7 +81,7 @@ ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &euro_sign &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &bt BT_CLR_ALL &trans    &trans
     &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
     &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
                                             &trans    &trans    &trans    &trans
