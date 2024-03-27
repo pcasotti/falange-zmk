@@ -49,10 +49,10 @@
         default_layer {
             display-name = "BASE";
             bindings = <
-    &none     &none     &none     &none     &none                         &kp F     &kp G     &kp C     &kp R     &kp L
-    &none     &none     &none     &none     &none                         &kp D     &kp H     &kp T     &kp N     &kp S
-    &none     &none     &none     &none     &none                         &kp B     &kp M     &kp W     &kp V     &kp Z
-                                            &none     &none     &mo SYM   &kp SPACE
+    &none     &none     &none     &none     &none                         &none     &none     &none     &none     &none
+    &none     &none     &none     &none     &none                         &none     &none     &none     &none     &none
+    &none     &none     &none     &none     &none                         &none     &none     &none     &none     &none
+                                            &none     &none     &none     &none
             >;
         };
     };
