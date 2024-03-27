@@ -1,0 +1,5 @@
+config SHIELD_FALANGE_LEFT
+    def_bool $(shields_list_contains,falange_left)
+
+config SHIELD_FALANGE_RIGHT
+    def_bool $(shields_list_contains,falange_right)
