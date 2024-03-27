@@ -19,6 +19,8 @@
 ---
 include:
   - board: nice_nano_v2
+    shield: falange-taipo_left
+  - board: nice_nano_v2
     shield: falange_left
   - board: nice_nano_v2
     shield: falange_right
