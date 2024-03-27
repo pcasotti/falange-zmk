@@ -1,4 +1,4 @@
-#include "falange.dtsi"
+#include "falange-taipo.dtsi"
 
 &default_transform {
     row-offset = <1>;

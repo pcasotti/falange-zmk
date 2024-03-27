@@ -1,6 +1,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
-#include "falange-pinctrl.dtsi"
+#include "falange-taipo-pinctrl.dtsi"
 
 / {
     chosen {

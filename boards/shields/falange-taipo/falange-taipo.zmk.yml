@@ -1,6 +1,6 @@
 file_format: "1"
-id: falange
-name: Falange
+id: falange-taipo
+name: FalangeTaipo
 type: shield
 url: https://github.com/pcasotti/falange-zmk/
 requires: [pro_micro]
@@ -9,5 +9,5 @@ features:
   - keys
   - display
 siblings:
-  - falange_left
-  - falange_right
+  - falange-taipo_left
+  - falange-taipo_right
