@@ -22,8 +22,31 @@
 #define BR_BSLH NUBS
 #define BR_QMARK LS(BR_SLASH)
 #define BR_PIPE LS(BR_BSLH)
+#define BR_CCED SEMI
+#define BR_ACUT LBKT
+#define BR_GRAVE LS(BR_ACUT)
 
 / {
+    macros {
+        ZMK_MACRO(aac, bindings = <&kp BR_ACUT &kp A>;)
+        ZMK_MACRO(oac, bindings = <&kp BR_ACUT &kp O>;)
+        ZMK_MACRO(eac, bindings = <&kp BR_ACUT &kp E>;)
+        ZMK_MACRO(uac, bindings = <&kp BR_ACUT &kp U>;)
+        ZMK_MACRO(iac, bindings = <&kp BR_ACUT &kp I>;)
+
+        ZMK_MACRO(atd, bindings = <&kp BR_TILDE &kp A>;)
+        ZMK_MACRO(otd, bindings = <&kp BR_TILDE &kp O>;)
+        ZMK_MACRO(etd, bindings = <&kp BR_TILDE &kp E>;)
+        ZMK_MACRO(utd, bindings = <&kp BR_TILDE &kp U>;)
+        ZMK_MACRO(itd, bindings = <&kp BR_TILDE &kp I>;)
+
+        ZMK_MACRO(agr, bindings = <&kp BR_GRAVE &kp A>;)
+        ZMK_MACRO(ogr, bindings = <&kp BR_GRAVE &kp O>;)
+        ZMK_MACRO(egr, bindings = <&kp BR_GRAVE &kp E>;)
+        ZMK_MACRO(ugr, bindings = <&kp BR_GRAVE &kp U>;)
+        ZMK_MACRO(igr, bindings = <&kp BR_GRAVE &kp I>;)
+    };
+
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
@@ -87,9 +110,9 @@
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &bt BT_CLR_ALL &trans    &trans
-    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
-    &trans    &trans    &trans    &trans    &trans                        &trans    &trans    &trans    &trans    &trans
+    &aac      &oac      &eac      &uac      &iac                          &trans    &trans    &kp BR_CCED  &trans    &trans
+    &atd      &otd      &etd      &utd      &itd                          &trans    &trans    &trans    &trans    &trans
+    &agr      &ogr      &egr      &ugr      &igr                          &bt BT_CLR_ALL &trans &trans  &trans    &trans
                                             &trans    &trans    &trans    &trans
             >;
         };
