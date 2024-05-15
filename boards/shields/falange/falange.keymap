@@ -2,8 +2,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-#include "helper.h"
-
 #define DEFAULT 0
 #define SYM 1
 #define NAV 2
@@ -12,10 +10,17 @@
 #define GAME0 5
 #define GAME1 6
 
-#define OS_UNICODE_LEAD &macro_tap &kp LS(LC(U))
-#define OS_UNICODE_TRAIL &macro_tap &kp SPACE
-
-ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)
+#define BR_SQT GRAVE
+#define BR_SEMI SLASH
+#define BR_LBKT RBKT
+#define BR_LBRC RBRC
+#define BR_RBKT BSLH
+#define BR_RBRC PIPE
+#define BR_SLASH INT1
+#define BR_TILDE SQT
+#define BR_CARET LS(BR_TILDE)
+#define BR_BSLH NUBS
+#define BR_QMARK LS(BR_BSLH)
 
 / {
     conditional_layers {
@@ -41,9 +46,9 @@ ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)
         default_layer {
             display-name = "BASE";
             bindings = <
-    &kp SQT   &kp COMMA &kp DOT   &kp P     &kp Y                         &kp F     &kp G     &kp C     &kp R     &kp L
+    &kp BR_SQT &kp COMMA &kp DOT  &kp P     &kp Y                         &kp F     &kp G     &kp C     &kp R     &kp L
     &kp A     &kp O     &kp E     &kp U     &kp I                         &kp D     &kp H     &kp T     &kp N     &kp S
-    &kp SEMI  &kp Q     &kp J     &kp K     &kp X                         &kp B     &kp M     &kp W     &kp V     &kp Z
+    &kp BR_SEMI &kp Q   &kp J     &kp K     &kp X                         &kp B     &kp M     &kp W     &kp V     &kp Z
                                             &kp LSHFT &mo NAV   &mo SYM   &kp SPACE
             >;
         };
@@ -51,9 +56,9 @@ ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)
         sym_layer {
             display-name = "SYM";
             bindings = <
-    &kp AT    &kp LBKT  &kp LBRC  &kp LPAR  &kp DLLR                      &kp LT    &kp RPAR  &kp RBRC  &kp RBKT  &kp GT
+    &kp AT    &kp BR_LBKT &kp BR_LBRC &kp LPAR &kp DLLR                   &kp LT    &kp RPAR  &kp BR_RBRC &kp BR_RBKT &kp GT
     &kp ESC   &kp STAR  &kp MINUS &kp EQUAL &kp PLUS                      &kp AMPS  &kp RGUI  &kp LALT  &kp RCTRL &kp RSHFT
-    &kp PIPE  &kp HASH  &kp UNDER &kp EXCL  &kp PRCNT                     &kp BSLH  &kp SLASH &kp TILDE &kp QMARK &kp CARET
+    &kp PIPE  &kp HASH  &kp UNDER &kp EXCL  &kp PRCNT                     &kp BR_BSLH &kp BR_SLASH &kp BR_TILDE &kp BR_QMARK &kp BR_CARET
                                             &mo ACC   &trans    &trans    &trans
             >;
         };
@@ -103,7 +108,7 @@ ZMK_UNICODE_SINGLE(euro_sign, N2, N0, A, C)
             bindings = <
     &kp N5    &kp N4    &trans    &kp N1    &kp N2                        &none     &none     &none     &none     &none
     &kp ESC   &trans    &trans    &trans    &kp N3                        &none     &none     &none     &none     &none
-    &kp SQT   &trans    &kp T     &kp P     &trans                        &none     &none     &none     &none     &none
+    &kp BR_SQT &trans   &kp T     &kp P     &trans                        &none     &none     &none     &none     &none
                                             &tog GAME0 &trans   &none     &none
             >;
         };
