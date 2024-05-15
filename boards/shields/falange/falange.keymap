@@ -20,7 +20,8 @@
 #define BR_TILDE SQT
 #define BR_CARET LS(BR_TILDE)
 #define BR_BSLH NUBS
-#define BR_QMARK LS(BR_BSLH)
+#define BR_QMARK LS(BR_SLASH)
+#define BR_PIPE LS(BR_BSLH)
 
 / {
     conditional_layers {
@@ -58,7 +59,7 @@
             bindings = <
     &kp AT    &kp BR_LBKT &kp BR_LBRC &kp LPAR &kp DLLR                   &kp LT    &kp RPAR  &kp BR_RBRC &kp BR_RBKT &kp GT
     &kp ESC   &kp STAR  &kp MINUS &kp EQUAL &kp PLUS                      &kp AMPS  &kp RGUI  &kp LALT  &kp RCTRL &kp RSHFT
-    &kp PIPE  &kp HASH  &kp UNDER &kp EXCL  &kp PRCNT                     &kp BR_BSLH &kp BR_SLASH &kp BR_TILDE &kp BR_QMARK &kp BR_CARET
+    &kp BR_PIPE &kp HASH &kp UNDER &kp EXCL &kp PRCNT                     &kp BR_BSLH &kp BR_SLASH &kp BR_TILDE &kp BR_QMARK &kp BR_CARET
                                             &mo ACC   &trans    &trans    &trans
             >;
         };
