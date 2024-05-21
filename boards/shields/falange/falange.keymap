@@ -130,10 +130,10 @@
         game1_layer {
             display-name = "GAME";
             bindings = <
-    &kp N5    &kp N4    &trans    &kp N1    &kp N2                        &none     &none     &none     &none     &none
-    &kp ESC   &trans    &trans    &trans    &kp N3                        &none     &none     &none     &none     &none
-    &kp BR_SQT &trans   &kp T     &kp P     &trans                        &none     &none     &none     &none     &none
-                                            &tog GAME0 &trans   &none     &none
+    &kp N5    &kp N4    &trans    &kp N1    &kp N2                        &trans    &trans    &kp UP    &trans    &trans
+    &kp ESC   &trans    &trans    &trans    &kp N3                        &trans    &kp LEFT  &kp DOWN  &kp RIGHT &trans
+    &kp BR_SQT &kp M    &kp T     &kp P     &trans                        &trans    &trans    &trans    &trans    &trans
+                                            &tog GAME0 &trans   &trans    &trans
             >;
         };
     };
