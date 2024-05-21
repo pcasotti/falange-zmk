@@ -1,6 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
 
 #define DEFAULT 0
 #define SYM 1
@@ -110,8 +111,8 @@
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &aac      &oac      &eac      &uac      &iac                          &trans    &trans    &kp BR_CCED  &trans    &trans
-    &atd      &otd      &etd      &utd      &itd                          &trans    &trans    &trans    &trans    &trans
+    &aac      &oac      &eac      &uac      &iac                          &trans    &trans    &kp BR_CCED &trans  &trans
+    &atd      &otd      &etd      &utd      &itd                          &ext_power EP_TOG &trans &trans &trans  &trans
     &agr      &ogr      &egr      &ugr      &igr                          &bt BT_CLR_ALL &trans &trans  &trans    &trans
                                             &trans    &trans    &trans    &trans
             >;
