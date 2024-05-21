@@ -111,8 +111,8 @@
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &aac      &oac      &eac      &uac      &iac                          &trans    &trans    &kp BR_CCED &trans  &trans
-    &atd      &otd      &etd      &utd      &itd                          &ext_power EP_TOG &trans &trans &trans  &trans
+    &aac      &oac      &eac      &uac      &iac                          &ext_power EP_ON &trans &kp BR_CCED &trans &trans
+    &atd      &otd      &etd      &utd      &itd                          &ext_power EP_OFF &trans &trans &trans  &trans
     &agr      &ogr      &egr      &ugr      &igr                          &bt BT_CLR_ALL &trans &trans  &trans    &trans
                                             &trans    &trans    &trans    &trans
             >;
