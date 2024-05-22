@@ -93,7 +93,7 @@
             bindings = <
     &kp C_BRI_DN &kp C_BRI_UP &kp TAB &kp C_VOL_DN &kp C_VOL_UP           &trans    &trans    &kp UP    &kp RET   &kp DEL
     &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &kp C_MUTE                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT &kp BSPC
-    &trans    &trans    &trans    &bootloader &sys_reset                  &td0      &trans    &trans    &trans    &trans
+    &trans    &trans    &trans    &trans    &trans                        &td0      &trans    &trans    &trans    &trans
                                             &tog GAME0 &trans   &trans    &trans
             >;
         };
@@ -111,8 +111,8 @@
         acc_layer {
             display-name = "ACC";
             bindings = <
-    &aac      &oac      &eac      &uac      &iac                          &ext_power EP_ON &trans &kp BR_CCED &trans &trans
-    &atd      &otd      &etd      &utd      &itd                          &ext_power EP_OFF &trans &trans &trans  &trans
+    &aac      &oac      &eac      &uac      &iac                          &trans    &trans    &kp BR_CCED &trans  &trans
+    &atd      &otd      &etd      &utd      &itd                          &trans    &trans    &trans    &trans    &trans
     &agr      &ogr      &egr      &ugr      &igr                          &bt BT_CLR_ALL &trans &trans  &trans    &trans
                                             &trans    &trans    &trans    &trans
             >;
@@ -132,7 +132,7 @@
             display-name = "GAME";
             bindings = <
     &kp N5    &kp N4    &trans    &kp N1    &kp N2                        &trans    &trans    &kp UP    &trans    &trans
-    &kp ESC   &trans    &trans    &trans    &kp N3                        &trans    &kp LEFT  &kp DOWN  &kp RIGHT &trans
+    &kp ESC   &trans    &trans    &kp N3    &trans                        &trans    &kp LEFT  &kp DOWN  &kp RIGHT &trans
     &kp BR_SQT &kp M    &kp T     &kp P     &trans                        &trans    &trans    &trans    &trans    &trans
                                             &tog GAME0 &trans   &trans    &trans
             >;
