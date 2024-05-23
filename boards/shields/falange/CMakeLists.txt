@@ -21,4 +21,5 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM AND CONFIG_ZMK
     zephyr_library_include_directories(${ZEPHYR_BASE}/drivers)
     zephyr_library_include_directories(${CMAKE_SOURCE_DIR}/include)
     zephyr_library_sources(custom_status_screen_right.c)
+    zephyr_library_sources(widgets/battery_status.c)
 endif()
