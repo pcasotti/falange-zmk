@@ -12,6 +12,7 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM AND ((NOT CONF
     zephyr_library_sources(widgets/layer_status.c)
     zephyr_library_sources(widgets/modifiers.c)
     zephyr_library_sources(widgets/modifiers_sym.c)
+    zephyr_library_sources(widgets/screen.c)
 endif()
 if(CONFIG_ZMK_DISPLAY AND CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM AND CONFIG_ZMK_SPLIT AND (NOT CONFIG_ZMK_SPLIT_ROLE_CENTRAL))
     zephyr_library()
