@@ -30,6 +30,8 @@ static uint8_t x = 25;
 static uint8_t y = 16;
 static uint8_t dir = 0;
 
+static lv_anim_t a;
+
 void anim_reset(lv_obj_t *canvas) {
     x = 15;
     y = 15;
@@ -81,7 +83,8 @@ void anim_exec(void *canvas, int32_t val) {
 }
 
 static void set_symbol(lv_obj_t *widget, struct key_press_state state) {
-    lv_canvas_set_px(widget, 0, 0, lv_color_black());
+    lv_anim_del_all();
+    lv_anim_start(&a);
 }
 
 void key_press_update_cb(struct key_press_state state) {
@@ -109,14 +112,14 @@ int zmk_widget_key_press_init(struct zmk_widget_key_press *widget, lv_obj_t *par
 
     canvas_reset(widget->obj);
 
-    lv_anim_t a;
+    lv_anim_del_all();
     lv_anim_init(&a);
     lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t) anim_exec);
     lv_anim_set_var(&a, widget->obj);
-    lv_anim_set_time(&a, 10000);
-    lv_anim_set_values(&a, 1, 200);
+    lv_anim_set_time(&a, 15000);
+    lv_anim_set_values(&a, 1, 300);
 
-    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
+    // lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
 
     lv_anim_start(&a);
 
