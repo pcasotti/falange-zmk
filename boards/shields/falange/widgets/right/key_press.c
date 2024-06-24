@@ -67,22 +67,12 @@ void anim_exec(void *canvas, int32_t val) {
         head++;
         head %= 200;
     }
-    dir %= 4;
+    dir %= 8;
 
-    switch (dir) {
-        case 0:
-            y++;
-            break;
-        case 1:
-            x++;
-            break;
-        case 2:
-            y--;
-            break;
-        case 3:
-            x--;
-            break;
-    }
+    if (dir == 0 || dir == 1) y++;
+    else if (dir == 2 || dir == 3) x++;
+    else if (dir == 4 || dir == 5) y--;
+    else if (dir == 6 || dir == 7) x--;
 
     if (x == 0) x = 48;
     if (x == 49) x = 1;
