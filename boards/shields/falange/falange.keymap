@@ -83,7 +83,7 @@
             display-name = "SYM";
             bindings = <
     &kp AT    &kp BR_LBKT &kp BR_LBRC &kp LPAR &kp DLLR                   &kp LT    &kp RPAR  &kp BR_RBRC &kp BR_RBKT &kp GT
-    &kp ESC   &kp STAR  &kp MINUS &kp EQUAL &kp PLUS                      &kp AMPS  &sk LGUI  &sk LALT  &sk RCTRL &sk RSHFT
+    &kp ESC   &kp STAR  &kp MINUS &kp EQUAL &kp PLUS                      &kp AMPS  &kp LGUI  &kp LALT  &kp RCTRL &kp RSHFT
     &kp BR_PIPE &kp HASH &kp UNDER &kp EXCL &kp PRCNT                     &kp BR_BSLH &kp BR_SLASH &kp BR_TILDE &kp BR_QMARK &kp BR_CARET
                                             &mo ACC   &trans    &trans    &trans
             >;
@@ -93,7 +93,7 @@
             display-name = "NAV";
             bindings = <
     &kp C_BRI_DN &kp C_BRI_UP &kp TAB &kp C_VOL_DN &kp C_VOL_UP           &trans    &trans    &kp UP    &kp RET   &kp DEL
-    &sk LSHFT &sk LCTRL &sk LALT  &sk LGUI  &kp C_MUTE                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT &kp BSPC
+    &kp LSHFT &kp LCTRL &kp LALT  &kp LGUI  &kp C_MUTE                    &trans    &kp LEFT  &kp DOWN  &kp RIGHT &kp BSPC
     &trans    &trans    &trans    &trans    &trans                        &td0      &trans    &trans    &trans    &trans
                                             &tog GAME0 &trans   &trans    &mo BLE
             >;
