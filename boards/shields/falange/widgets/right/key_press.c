@@ -23,6 +23,89 @@ struct key_press_state {
     bool state;
 };
 
+struct pos {
+    uint8_t x;
+    uint8_t y;
+};
+
+struct piece {
+    struct pos pos;
+    uint8_t rotation;
+};
+
+static struct piece starting_pieces[7] = {
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+};
+
+static struct piece pieces[7] = {
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+    {{1,16}, 0},
+};
+
+static struct pos rotations[7][4][4] = {
+    {
+        {{2,0},{2,1},{2,2},{2,3}},
+        {{0,1},{1,1},{2,1},{3,1}},
+        {{2,0},{2,1},{2,2},{2,3}},
+        {{0,1},{1,1},{2,1},{3,1}},
+    },
+    {
+        {{1,1},{1,2},{2,1},{2,2}},
+        {{1,1},{1,2},{2,1},{2,2}},
+        {{1,1},{1,2},{2,1},{2,2}},
+        {{1,1},{1,2},{2,1},{2,2}},
+    },
+    {
+        {{1,0},{1,1},{0,2},{1,2}},
+        {{0,0},{0,1},{1,1},{2,1}},
+        {{1,0},{2,0},{1,1},{1,2}},
+        {{0,1},{1,1},{2,1},{2,2}},
+    },
+    {
+        {{1,0},{1,1},{0,0},{1,2}},
+        {{2,0},{0,1},{1,1},{2,1}},
+        {{1,0},{2,2},{1,1},{1,2}},
+        {{0,1},{1,1},{2,1},{0,2}},
+    },
+    {
+        {{1,0},{1,1},{2,1},{2,2}},
+        {{1,0},{2,0},{0,1},{1,1}},
+        {{1,0},{1,1},{2,1},{2,2}},
+        {{1,0},{2,0},{0,1},{1,1}},
+    },
+    {
+        {{2,0},{1,1},{2,1},{1,2}},
+        {{0,0},{1,0},{1,1},{2,1}},
+        {{2,0},{1,1},{2,1},{1,2}},
+        {{0,0},{1,0},{1,1},{2,1}},
+    },
+    {
+        {{1,0},{1,1},{1,2},{2,1}},
+        {{0,1},{1,1},{2,1},{1,2}},
+        {{1,0},{1,1},{1,2},{0,1}},
+        {{0,1},{1,1},{2,1},{1,0}},
+    },
+};
+
+static uint8_t current_piece = 2;
+static bool input_pending = false;
+
+static bool pressed[4] = { false, false, false, false };
+
+static int8_t inputs[4] = { 0, 0, 0, 0 };
+static int8_t current_input = -1;
+
 static lv_color_t canvas_buffer[50 * 32];
 static lv_color_t back_buffer[50 * 32];
 
@@ -38,61 +121,128 @@ void canvas_reset(lv_obj_t *canvas) {
     lv_canvas_set_buffer(canvas, canvas_buffer, 50, 32, LV_IMG_CF_TRUE_COLOR);
     lv_canvas_fill_bg(canvas, lv_color_black(), LV_OPA_COVER);
     lv_canvas_draw_rect(canvas, 1, 1, 48, 30, &rect_dsc);
+}
 
-    lv_color_t c;
-    c.full = 3;
-    for (uint8_t i = 5; i < 15; i++) {
-        lv_canvas_set_px(canvas, i+10, i+1, c);
-        lv_canvas_set_px(canvas, i+10, 30-i, c);
+void draw_piece(uint8_t piece, void *canvas, lv_color_t color) {
+    for (uint8_t i = 0; i < 4; ++i) {
+        uint8_t x = pieces[piece].pos.x + (rotations[piece][pieces[piece].rotation][i].x*2);
+        uint8_t y = pieces[piece].pos.y + (rotations[piece][pieces[piece].rotation][i].y*2);
+        lv_canvas_set_px(canvas, x, y, color);
+        lv_canvas_set_px(canvas, x+1, y, color);
+        lv_canvas_set_px(canvas, x, y+1, color);
+        lv_canvas_set_px(canvas, x+1, y+1, color);
     }
 }
 
 void anim_exec(void *widget, int32_t val) {
-    if (frame == 2) {
-        lv_canvas_set_px(widget, 48, del, lv_color_white());
-        del++;
-        if (del >= 31) del = 1;
-    }
-    frame = (frame+1)%3;
+    lv_canvas_set_buffer(widget, canvas_buffer, 50, 32, LV_IMG_CF_TRUE_COLOR);
+    draw_piece(current_piece, widget, lv_color_white());
 
-    lv_color_t c;
-    c.full = 3;
-    for (uint8_t i = 5; i < 15; i++) {
-        lv_canvas_set_px(widget, i+10, i+1, c);
-        lv_canvas_set_px(widget, i+10, 30-i, c);
+    if (current_input != -1) {
+        if (inputs[current_input] == 0) {
+            pieces[current_piece].rotation = (pieces[current_piece].rotation+1)%4;
+        } else {
+            int8_t dir = 0;
+            if (inputs[current_input] == 2) dir = 2;
+            else if (inputs[current_input] == 3) dir = -2;
+
+            bool collide = false;
+            for (uint8_t i = 0; i < 4; ++i) {
+                uint8_t x = pieces[current_piece].pos.x + (rotations[current_piece][pieces[current_piece].rotation][i].x*2);
+                uint8_t y = pieces[current_piece].pos.y + (rotations[current_piece][pieces[current_piece].rotation][i].y*2);
+                if (lv_canvas_get_px(widget, x, y+dir).full == lv_color_black().full) {
+                    collide = true;
+                    break;
+                } else if (lv_canvas_get_px(widget, x+1, y+dir).full == lv_color_black().full) {
+                    collide = true;
+                    break;
+                } else if (lv_canvas_get_px(widget, x, y+dir+1).full == lv_color_black().full) {
+                    collide = true;
+                    break;
+                } else if (lv_canvas_get_px(widget, x+1, y+dir+1).full == lv_color_black().full) {
+                    collide = true;
+                    break;
+                }
+            }
+
+            if (!collide) pieces[current_piece].pos.y += dir;
+        }
+
+        --current_input;
     }
 
-    for (uint8_t i = 48; i > 0; i--) {
-        for (uint8_t j = 30; j > 0; j--) {
-            if (lv_canvas_get_px(widget, i, j).full == lv_color_black().full) {
-                if (i+1 <= 48) {
-                    if (lv_canvas_get_px(widget, i+1, j).full == lv_color_white().full) {
-                        lv_canvas_set_px(widget, i, j, lv_color_white());
-                        lv_canvas_set_px(widget, i+1, j, lv_color_black());
-                    } else if (j+1 <= 30
-                            && lv_canvas_get_px(widget, i+1, j+1).full == lv_color_white().full
-                            && lv_canvas_get_px(widget, i, j+1).full == lv_color_white().full) {
-                        lv_canvas_set_px(widget, i, j, lv_color_white());
-                        lv_canvas_set_px(widget, i+1, j+1, lv_color_black());
-                    } else if (j-1 >= 1
-                            && lv_canvas_get_px(widget, i+1, j-1).full == lv_color_white().full
-                            && lv_canvas_get_px(widget, i, j-1).full == lv_color_white().full) {
-                        lv_canvas_set_px(widget, i, j, lv_color_white());
-                        lv_canvas_set_px(widget, i+1, j-1, lv_color_black());
+    if (frame == 1) {
+        frame = 0;
+
+        bool collide = false;
+        for (uint8_t i = 0; i < 4; ++i) {
+            uint8_t x = pieces[current_piece].pos.x + (rotations[current_piece][pieces[current_piece].rotation][i].x*2);
+            uint8_t y = pieces[current_piece].pos.y + (rotations[current_piece][pieces[current_piece].rotation][i].y*2);
+            if (lv_canvas_get_px(widget, x+1, y).full == lv_color_black().full) {
+                collide = true;
+                break;
+            } else if (lv_canvas_get_px(widget, x+2, y).full == lv_color_black().full) {
+                collide = true;
+                break;
+            } else if (lv_canvas_get_px(widget, x, y+1).full == lv_color_black().full) {
+                collide = true;
+                break;
+            } else if (lv_canvas_get_px(widget, x+2, y+1).full == lv_color_black().full) {
+                collide = true;
+                break;
+            }
+        }
+
+        if (!collide) pieces[current_piece].pos.x += 1;
+
+        draw_piece(current_piece, widget, lv_color_black());
+
+        if (collide) {
+            if (pieces[current_piece].pos.x == 1) {
+                canvas_reset(widget);
+                return;
+            }
+
+            draw_piece(current_piece, widget, lv_color_black());
+            current_piece = (current_piece+1)%7;
+
+            pieces[current_piece] = starting_pieces[current_piece];
+
+            for (uint8_t i = 0; i < 4; ++i) {
+                bool line = true;
+                uint8_t x = pieces[current_piece].pos.x + (rotations[current_piece][pieces[current_piece].rotation][i].x*2);
+                for (uint8_t j = 2; j < 30; ++j) {
+                    if (lv_canvas_get_px(widget, x, j).full != lv_color_black().full) {
+                        line = false;
+                        break;
                     }
+                }
+                if (line) {
+                    for (uint8_t j = 2; j < 30; ++j) {
+                        lv_canvas_set_px(widget, x, j, lv_color_white());
+                        lv_canvas_set_px(widget, x+1, j, lv_color_white());
+                    }
+                    break;
                 }
             }
         }
-    }
-
-    for (uint8_t i = 5; i < 15; i++) {
-        lv_canvas_set_px(widget, i+10, i+1, lv_color_black());
-        lv_canvas_set_px(widget, i+10, 30-i, lv_color_black());
+    } else {
+        draw_piece(current_piece, widget, lv_color_black());
+        ++frame;
     }
 }
 
 static void set_symbol(lv_obj_t *widget, struct key_press_state state) {
-    lv_canvas_set_px(widget, 1, state.position%30, lv_color_black());
+    if (current_input == 3) return;
+
+    int8_t i = -1;
+    if (state.position%4 == 3 && state.state) i = 0;
+    else if (state.position%4 == 0 && state.state) i = 2;
+    else if (state.position%4 == 1 && state.state) i = 1;
+    else if (state.position%4 == 2 && state.state) i = 3;
+
+    ++current_input;
+    inputs[current_input] = i;
 }
 
 void key_press_update_cb(struct key_press_state state) {
