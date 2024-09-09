@@ -33,8 +33,6 @@ static uint8_t prev_x[200] = {0};
 static uint8_t prev_y[200] = {0};
 static uint8_t head = 0;
 
-static lv_anim_t a;
-
 void anim_reset(lv_obj_t *canvas) {
     x = 15;
     y = 15;
@@ -82,14 +80,20 @@ void anim_exec(void *canvas, int32_t val) {
     lv_canvas_set_px(canvas, prev_x[head], prev_y[head], lv_color_white());
 }
 
-static void set_symbol(lv_obj_t *widget, struct key_press_state state) {
-    lv_anim_del_all();
+static void set_animation(lv_obj_t *widget, struct key_press_state state) {
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t) anim_exec);
+    lv_anim_set_var(&a, widget);
+    lv_anim_set_time(&a, 10000);
+    lv_anim_set_values(&a, 1, 200);
+    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
     lv_anim_start(&a);
 }
 
 void key_press_update_cb(struct key_press_state state) {
     struct zmk_widget_key_press *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_symbol(widget->obj, state); }
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { set_animation(widget->obj, state); }
 }
 
 static struct key_press_state key_press_get_state(const zmk_event_t *eh) {
@@ -112,15 +116,13 @@ int zmk_widget_key_press_init(struct zmk_widget_key_press *widget, lv_obj_t *par
 
     canvas_reset(widget->obj);
 
-    lv_anim_del_all();
+    lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t) anim_exec);
     lv_anim_set_var(&a, widget->obj);
-    lv_anim_set_time(&a, 30000);
-    lv_anim_set_values(&a, 1, 600);
-
-    // lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
-
+    lv_anim_set_time(&a, 10000);
+    lv_anim_set_values(&a, 1, 200);
+    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
     lv_anim_start(&a);
 
     sys_slist_append(&widgets, &widget->node);
